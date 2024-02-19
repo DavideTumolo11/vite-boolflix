@@ -20,7 +20,10 @@ export default {
 <style scoped>
 header {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(0, 0, 0);
+    height: 100px;
 }
 
 .logo {
@@ -28,11 +31,11 @@ header {
     align-items: center;
     justify-content: center;
     color: red;
-    font-size: 100px;
+    font-size: 50px;
     border: 1px solid green;
     background-color: rgba(128, 128, 0, 0.265);
     border-radius: 50px;
-    width: 400px;
-    height: 80px;
+    width: 200px;
+    height: 60px;
 }
 </style>
