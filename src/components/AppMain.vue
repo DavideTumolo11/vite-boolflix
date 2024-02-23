@@ -20,6 +20,13 @@ export default {
                     this.cards = response.data.results;
                     console.log(response.data.results);
                 })
+
+            axios
+                .get(state.tv_api_url + "&query=" + search)
+                .then((response) => {
+                    this.cards.push(...response.data.results);
+                    console.log(response.data.results);
+                })
         }
     },
     mounted() {
