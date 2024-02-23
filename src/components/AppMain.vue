@@ -8,12 +8,23 @@ export default {
         return {
             cards: [],
             basic_url_img: ('https://image.tmdb.org/t/p/w200'),
-            state
+            state,
 
         };
     },
+    methods: {
+        loadResult(search) {
+            axios
+                .get(state.api_url + "&query=" + search)
+                .then((response) => {
+                    this.cards = response.data.results;
+                    console.log(response.data.results);
+                })
+        }
+    },
     mounted() {
-        axios.get('https://api.themoviedb.org/3/search/movie?query=popular&include_adult=true&api_key=4d59c37e05a472c0de36abce1cbde3e5&language=it-IT&page=1')
+        axios
+            .get(state.api_url + "&query=rocky")
             .then(response => {
                 console.log(response.data.results);
                 this.cards = response.data.results;
@@ -26,9 +37,15 @@ export default {
 </script>
 
 
-
 <template>
     <main>
+        <div>
+            <input type="text" name="search" id="search" placeholder="text" v-model="state.searchText"
+                @keyup.enter="loadResult(state.searchText)" />
+            <button @click="loadResult(state.searchText)">
+                Click here
+            </button>
+        </div>
         <section class="cards">
             <div class="container">
                 <div class="row">
@@ -42,11 +59,11 @@ export default {
                             <div class="overview">
                                 <p>{{ card.overview }}</p>
                             </div>
-                            <div class="language">
+                            <div class="original_language">
                                 Original language: {{ card.original_language }}
                             </div>
                             <div class="vote">
-                                {{ card.vote_average }}
+                                Vote: {{ card.vote_average }}
                             </div>
                         </div>
                     </div>
@@ -63,14 +80,19 @@ export default {
 
     &:hover {
         filter: drop-shadow(0 0 15px red);
-        scale: 1.2;
+        scale: 1.1;
     }
 }
 
-.title {
+.title,
+.original_title,
+.original_language {
     border-radius: 10px;
     color: rgb(255, 255, 255);
+    margin-bottom: 10px;
+    max-width: 200px;
 }
+
 
 .overview {
     background-color: rgb(0, 0, 0);
@@ -78,6 +100,7 @@ export default {
     max-width: 200px;
     max-height: 100px;
     overflow: auto;
+    margin-bottom: 20px;
 }
 
 .overview::-webkit-scrollbar {
