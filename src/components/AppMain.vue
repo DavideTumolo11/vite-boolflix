@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import { state } from '../state.js';
+import FlagIcon from "vue-lang-code-flags";
 
 export default {
     name: 'AppMain',
@@ -11,6 +12,9 @@ export default {
             state,
 
         };
+    },
+    components: {
+        FlagIcon,
     },
     methods: {
         loadResult(search) {
@@ -67,7 +71,7 @@ export default {
                                 <p>{{ card.overview }}</p>
                             </div>
                             <div class="original_language">
-                                Original language: {{ card.original_language }}
+                                Original language: <flag-icon :iso="card.original_language"></flag-icon>
                             </div>
                             <div class="vote">
                                 Vote: {{ card.vote_average }}
