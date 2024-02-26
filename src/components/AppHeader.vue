@@ -9,8 +9,8 @@ export default {
 
 <template>
     <header>
-        <div class="logo">
-            Boolflix
+        <div class="img_logo">
+            <img class="logo" src="../assets/img/Colorful Retro Illustrative Tasty Popcorn Logo.png" alt="">
         </div>
     </header>
 </template>
@@ -27,15 +27,14 @@ header {
 }
 
 .logo {
+    width: 600px;
+    height: 400px;
+}
+
+.img_logo {
+    margin-top: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: red;
-    font-size: 50px;
-    border: 1px solid green;
-    background-color: rgba(128, 128, 0, 0.265);
-    border-radius: 50px;
-    width: 200px;
-    height: 60px;
 }
 </style>

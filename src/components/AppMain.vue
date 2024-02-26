@@ -86,6 +86,10 @@ export default {
 </template>
 
 <style scoped>
+main {
+    margin-top: 80px;
+}
+
 .card {
     transition: all 1s;
 
