@@ -50,7 +50,7 @@ export default {
 
 <template>
     <main>
-        <div>
+        <div class="search_bar">
             <input type="text" name="search" id="search" placeholder="text" v-model="state.searchText"
                 @keyup.enter="loadResult(state.searchText)" />
             <button @click="loadResult(state.searchText)">
@@ -74,7 +74,10 @@ export default {
                                 Original language: <flag-icon :iso="card.original_language"></flag-icon>
                             </div>
                             <div class="vote">
-                                Vote: {{ card.vote_average }}
+                                Vote:
+                                <div v-for="index in 5"
+                                    :class="Math.ceil(card.vote_average / 2) >= index ? 'fa-solid fa-star gold-star' : 'fa-regular fa-star'">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -87,7 +90,12 @@ export default {
 
 <style scoped>
 main {
-    margin-top: 80px;
+    margin-top: 100px;
+}
+
+.search_bar {
+    margin-bottom: 30px;
+    margin-left: 20px;
 }
 
 .card {
@@ -99,6 +107,14 @@ main {
     }
 }
 
+.card:hover .additional-info {
+    display: block;
+}
+
+.additional-info {
+    display: none;
+}
+
 .title,
 .original_title,
 .original_language {
@@ -107,6 +123,17 @@ main {
     margin-bottom: 10px;
     max-width: 200px;
 }
+
+.vote {
+    font-size: 15px;
+    font-style: italic;
+    font-family: sans-serif;
+}
+
+.gold-star {
+    color: gold;
+}
+
 
 
 .overview {
