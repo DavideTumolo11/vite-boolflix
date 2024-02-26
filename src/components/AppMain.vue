@@ -63,20 +63,22 @@ export default {
                     <div class="col" v-for="card in cards">
                         <div class="card">
                             <img :src="basic_url_img + card.poster_path" alt="">
-                            <h3 class="title">Title: {{ card.title }}</h3>
-                            <h5 class="original_title">
-                                Original title: {{ card.original_title }}
-                            </h5>
-                            <div class="overview">
-                                <p>{{ card.overview }}</p>
-                            </div>
-                            <div class="original_language">
-                                Original language: <flag-icon :iso="card.original_language"></flag-icon>
-                            </div>
-                            <div class="vote">
-                                Vote:
-                                <div v-for="index in 5"
-                                    :class="Math.ceil(card.vote_average / 2) >= index ? 'fa-solid fa-star gold-star' : 'fa-regular fa-star'">
+                            <div class="card-hover">
+                                <h3 class="title">Title: {{ card.title }}</h3>
+                                <h5 class="original_title">
+                                    Original title: {{ card.original_title }}
+                                </h5>
+                                <div class="overview">
+                                    <p>{{ card.overview }}</p>
+                                </div>
+                                <div class="original_language">
+                                    Original language: <flag-icon :iso="card.original_language"></flag-icon>
+                                </div>
+                                <div class="vote">
+                                    Vote:
+                                    <div v-for="index in 5"
+                                        :class="Math.ceil(card.vote_average / 2) >= index ? 'fa-solid fa-star gold-star' : 'fa-regular fa-star'">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -99,32 +101,58 @@ main {
 }
 
 .card {
+    position: relative;
     transition: all 1s;
 
     &:hover {
         filter: drop-shadow(0 0 15px red);
         scale: 1.1;
     }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    &:hover img {
+        opacity: 0;
+    }
+
+    .card-hover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        opacity: 0;
+        transition: opacity 1s;
+    }
+
+    &:hover .card-hover {
+        opacity: 1;
+    }
 }
 
-.card:hover .additional-info {
-    display: block;
-}
 
-.additional-info {
-    display: none;
-}
+
 
 .title,
 .original_title,
 .original_language {
+    margin-left: 5px;
+    font-size: large;
+    font-family: sans-serif;
     border-radius: 10px;
     color: rgb(255, 255, 255);
-    margin-bottom: 10px;
+    margin-top: 10px;
     max-width: 200px;
 }
 
 .vote {
+    margin-top: 10px;
+    margin-left: 5px;
     font-size: 15px;
     font-style: italic;
     font-family: sans-serif;
@@ -135,12 +163,12 @@ main {
 }
 
 
-
 .overview {
-    background-color: rgb(0, 0, 0);
-    color: rgba(255, 0, 0, 0.58);
-    max-width: 200px;
-    max-height: 100px;
+    margin-top: 20px;
+    margin-left: 5px;
+    color: white;
+    max-width: 230px;
+    max-height: 170px;
     overflow: auto;
     margin-bottom: 20px;
 }
