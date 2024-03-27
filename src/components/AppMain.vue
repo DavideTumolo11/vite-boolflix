@@ -17,16 +17,17 @@ export default {
         FlagIcon,
     },
     methods: {
-        loadResult(search) {
+        loadResult() {
+            this.cards = [];
             axios
-                .get(state.api_url + "&query=" + search)
+                .get(state.api_url + "&query=" + state.searchText)
                 .then((response) => {
-                    this.cards = response.data.results;
+                    this.cards.push(...response.data.results);
                     console.log(response.data.results);
                 })
 
             axios
-                .get(state.tv_api_url + "&query=" + search)
+                .get(state.tv_api_url + "&query=" + state.searchText)
                 .then((response) => {
                     this.cards.push(...response.data.results);
                     console.log(response.data.results);
@@ -60,7 +61,7 @@ export default {
         <section class="cards">
             <div class="container">
                 <div class="row">
-                    <div class="col" v-for="card in cards">
+                    <div v-if="cards.length > 0" class="col" v-for="card in cards">
                         <div class="card">
                             <img :src="basic_url_img + card.poster_path" alt="">
                             <div class="card-hover">
@@ -82,6 +83,9 @@ export default {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div v-else>
+                        Non ci sono film
                     </div>
                 </div>
             </div>
